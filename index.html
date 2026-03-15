@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduGame - Where lessons become learning adventures</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .role-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .code-input {
+            width: 40px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 0 5px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+        }
+        .code-input:focus {
+            outline: none;
+            border-color: #4299e1;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e2e8f0;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background-color: #4299e1;
+        }
+        .activity-card {
+            transition: all 0.3s ease;
+        }
+        .activity-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Page 1: Landing/Role Selection -->
+    <div id="landing-page" class="min-h-screen flex flex-col">
+        <header class="py-4 px-6 shadow-sm bg-white">
+            <div class="container mx-auto">
+                <div class="flex items-center">
+                    <img src="http://static.photos/education/200x200/1" alt="EduGame Logo" class="h-12 w-auto">
+                    <span class="ml-3 text-2xl font-bold text-blue-600">EduGame</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow container mx-auto px-6 py-12">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Where lessons become learning adventures</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Engaging educational games for Filipino students and teachers</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-center gap-8 mb-16">
+                <!-- Teacher Card -->
+                <div class="role-card bg-white rounded-xl p-8 shadow-md flex-1 max-w-md">
+                    <div class="text-5xl mb-4 text-center">👩‍🏫</div>
+                    <h2 class="text-2xl font-bold text-center mb-3 text-gray-800">I'm a Teacher</h2>
+                    <p class="text-gray-600 text-center mb-6">Create games, track classes, view results</p>
+                    <button onclick="navigateTo('teacher-login')" class="w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-300">
+                        LOGIN / SIGN UP
+                    </button>
+                </div>
+
+                <!-- Student Card -->
+                <div class="role-card bg-white rounded-xl p-8 shadow-md flex-1 max-w-md">
+                    <div class="text-5xl mb-4 text-center">👧</div>
+                    <h2 class="text-2xl font-bold text-center mb-3 text-gray-800">I'm a Student</h2>
+                    <p class="text-gray-600 text-center mb-6">Play games, join with code, no account needed</p>
+                    <button onclick="navigateTo('student-code')" class="w-full py-3 px-6 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition duration-300">
+                        ENTER CODE
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center mb-12">
+                <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Just looking? Explore sample activities</a>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-xl font-semibold mb-6 text-gray-700">Sample Activities Preview</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Sample Activity 1 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden relative">
+                        <div class="relative">
+                            <img src="http://static.photos/education/640x360/1" alt="Conflict Detective" class="w-full h-40 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                                <i class="fas fa-lock text-white text-3xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-lg mb-2">Conflict Detective</h4>
+                            <p class="text-gray-600 text-sm">Identify different types of conflict in stories</p>
+                        </div>
+                    </div>
+
+                    <!-- Sample Activity 2 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden relative">
+                        <div class="relative">
+                            <img src="http://static.photos/education/640x360/2" alt="Character Match" class="w-full h-40 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                                <i class="fas fa-lock text-white text-3xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-lg mb-2">Character Match</h4>
+                            <p class="text-gray-600 text-sm">Match character traits to story characters</p>
+                        </div>
+                    </div>
+
+                    <!-- Sample Activity 3 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden relative">
+                        <div class="relative">
+                            <img src="http://static.photos/education/640x360/3" alt="Poetry Hunt" class="w-full h-40 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                                <i class="fas fa-lock text-white text-3xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-lg mb-2">Poetry Hunt</h4>
+                            <p class="text-gray-600 text-sm">Find figures of speech in Filipino poems</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-gray-800 text-white py-8">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p>&copy; 2025 EduGame. All rights reserved.</p>
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="#" class="hover:text-blue-300">About</a>
+                        <a href="#" class="hover:text-blue-300">Contact</a>
+                        <a href="#" class="hover:text-blue-300">Privacy</a>
+                        <a href="#" class="hover:text-blue-300">Terms</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Page 2: Teacher Login -->
+    <div id="teacher-login" class="min-h-screen hidden">
+        <header class="py-4 px-6 shadow-sm bg-white">
+            <div class="container mx-auto flex items-center">
+                <button onclick="navigateTo('landing-page')" class="mr-4 text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <div class="flex items-center">
+                    <img src="http://static.photos/education/200x200/1" alt="EduGame Logo" class="h-10 w-auto">
+                    <span class="ml-3 text-xl font-bold text-blue-600">EduGame</span>
+                </div>
+                <div class="ml-4 text-sm text-gray-600">Teacher Portal</div>
+            </div>
+        </header>
+
+        <main class="container mx-auto px-6 py-12 max-w-md">
+            <div class="bg-white rounded-xl shadow-md p-8">
+                <div class="flex border-b mb-6">
+                    <button id="login-tab-btn" class="flex-1 py-2 font-medium text-blue-600 border-b-2 border-blue-600">LOG IN</button>
+                    <button id="signup-tab-btn" class="flex-1 py-2 font-medium text-gray-500">SIGN UP</button>
+                </div>
+
+                <!-- Login Tab -->
+                <div id="login-tab" class="tab-content active">
+                    <form id="login-form">
+                        <div class="mb-4">
+                            <label for="login-email" class="block text-gray-700 mb-2">Email</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-envelope text-gray-400"></i>
+                                </div>
+                                <input type="email" id="login-email" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="login-password" class="block text-gray-700 mb-2">Password</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" id="login-password" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="••••••••" required>
+                                <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600" onclick="togglePassword('login-password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center mb-6">
+                            <input type="checkbox" id="remember-me" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <label for="remember-me" class="ml-2 block text-sm text-gray-700">Keep me logged in</label>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-300 mb-4">
+                            LOG IN
+                        </button>
+
+                        <div class="text-center mb-6">
+                            <a href="#" class="text-blue-600 hover:text-blue-800 text-sm">Forgot password?</a>
+                        </div>
+
+                        <div class="flex items-center mb-6">
+                            <div class="flex-grow border-t border-gray-300"></div>
+                            <span class="mx-4 text-gray-500">or</span>
+                            <div class="flex-grow border-t border-gray-300"></div>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="text-gray-600">New to EduGame? <a href="#" class="text-blue-600 hover:text-blue-800 font-medium" onclick="switchToSignup()">Create an account</a></p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Signup Tab -->
+                <div id="signup-tab" class="tab-content">
+                    <form id="signup-form">
+                        <div class="mb-4">
+                            <label for="signup-name" class="block text-gray-700 mb-2">Full Name</label>
+                            <input type="text" id="signup-name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Maria Reyes" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="signup-email" class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" id="signup-email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your@email.com" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="signup-password" class="block text-gray-700 mb-2">Password</label>
+                            <div class="relative">
+                                <input type="password" id="signup-password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="••••••••" required minlength="8">
+                                <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600" onclick="togglePassword('signup-password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Minimum 8 characters</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="signup-confirm-password" class="block text-gray-700 mb-2">Confirm Password</label>
+                            <input type="password" id="signup-confirm-password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="••••••••" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Grade Levels Taught</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="grade-7" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                    <label for="grade-7" class="ml-2 text-sm text-gray-700">Grade 7</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="grade-8" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                    <label for="grade-8" class="ml-2 text-sm text-gray-700">Grade 8</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="grade-9" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                    <label for="grade-9" class="ml-2 text-sm text-gray-700">Grade 9</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="grade-10" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                    <label for="grade-10" class="ml-2 text-sm text-gray-700">Grade 10</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="grade-11" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                    <label for="grade-11" class="ml-2 text-sm text-gray-700">Grade 11</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="grade-12" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                    <label for="grade-12" class="ml-2 text-sm text-gray-700">Grade 12</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="school" class="block text-gray-700 mb-2">School (optional)</label>
+                            <input type="text" id="school" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Manila High School">
+                        </div>
+
+                        <div class="flex items-center mb-6">
+                            <input type="checkbox" id="terms" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
+                            <label for="terms" class="ml-2 block text-sm text-gray-700">I agree to <a href="#" class="text-blue-600 hover:text-blue-800">Terms of Service</a> and <a href="#" class="text-blue-600 hover:text-blue-800">Privacy Policy</a></label>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-300 mb-4">
+                            CREATE ACCOUNT
+                        </button>
+
+                        <div class="text-center">
+                            <p class="text-gray-600">Already have an account? <a href="#" class="text-blue-600 hover:text-blue-800 font-medium" onclick="switchToLogin()">Log in</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Page 3: Student Enter Code -->
+    <div id="student-code" class="min-h-screen hidden">
+        <header class="py-4 px-6 shadow-sm bg-white">
+            <div class="container mx-auto flex items-center">
+                <button onclick="navigateTo('landing-page')" class="mr-4 text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <div class="flex items-center">
+                    <img src="http://static.photos/education/200x200/1" alt="EduGame Logo" class="h-10 w-auto">
+                    <span class="ml-3 text-xl font-bold text-blue-600">EduGame</span>
+                </div>
+                <div class="ml-4 text-sm text-gray-600">Student Access</div>
+            </div>
+        </header>
+
+        <main class="container mx-auto px-6 py-12 max-w-md">
+            <div class="text-center mb-8">
+                <img src="http://static.photos/education/640x360/4" alt="Students playing" class="w-full h-48 object-cover rounded-lg mx-auto mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Join Your Class Activity</h2>
+                <p class="text-gray-600">Enter the 6-digit code from your teacher</p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md p-8">
+                <form id="code-form" class="text-center">
+                    <div class="flex justify-center mb-8">
+                        <input type="text" maxlength="1" class="code-input" oninput="moveToNext(this, 1)">
+                        <input type="text" maxlength="1" class="code-input" oninput="moveToNext(this, 2)">
+                        <input type="text" maxlength="1" class="code-input" oninput="moveToNext(this, 3)">
+                        <input type="text" maxlength="1" class="code-input" oninput="moveToNext(this, 4)">
+                        <input type="text" maxlength="1" class="code-input" oninput="moveToNext(this, 5)">
+                        <input type="text" maxlength="1" class="code-input" oninput="moveToNext(this, 6)">
+                    </div>
+
+                    <button type="submit" class="w-full py-3 px-6 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition duration-300 mb-4">
+                        ENTER CLASS
+                    </button>
+
+                    <p class="text-gray-600 mb-6">No code? Ask your teacher!</p>
+
+                    <div class="border-t border-gray-200 pt-6">
+                        <button type="button" onclick="navigateTo('student-home')" class="text-blue-600 hover:text-blue-800 font-medium">
+                            Try a sample activity
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Page 4: Teacher Dashboard -->
+    <div id="teacher-dashboard" class="min-h-screen hidden">
+        <header class="py-4 px-6 shadow-sm bg-white">
+            <div class="container mx-auto flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="http://static.photos/education/200x200/1" alt="EduGame Logo" class="h-10 w-auto">
+                    <span class="ml-3 text-xl font-bold text-blue-600">EduGame</span>
+                </div>
+                <div class="flex items-center">
+                    <span id="welcome-user" class="mr-4 text-gray-700">Welcome back, Ms. Reyes!</span>
+                    <div class="relative">
+                        <button id="profile-btn" class="flex items-center text-gray-600 hover:text-blue-600">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                <i class="fas fa-user text-blue-600"></i>
+                            </div>
+                        </button>
+                        <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                            <a href="#" onclick="logout()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="container mx-auto px-6 py-8">
+            <!-- Quick Create Section -->
+            <section class="mb-12">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800">What are you teaching today?</h2>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <input type="text" id="game-search" class="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="e.g., 'figures of speech' or paste your lesson here">
+                        <button onclick="searchGames()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-300 whitespace-nowrap">
+                            GET GAME SUGGESTIONS
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Classes Section -->
+            <section class="mb-12">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">My Classes</h2>
+                    <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                        + ADD NEW CLASS
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Class Card 1 -->
+                    <div class="activity-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="alert('Navigating to Grade 7 - A')">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-bold text-gray-800">Grade 7 - A</h3>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">English</span>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-2">
+                                <span><i class="fas fa-users mr-1"></i> 28 students</span>
+                                <span><i class="fas fa-key mr-1"></i> 4729</span>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-4">
+                                <span><i class="fas fa-gamepad mr-1"></i> 5 activities</span>
+                                <span class="font-medium">Avg: 82%</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="flex-1 py-2 px-3 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-lg transition duration-300">
+                                    VIEW
+                                </button>
+                                <button class="flex-1 py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                    ADD ACTIVITY
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Class Card 2 -->
+                    <div class="activity-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="alert('Navigating to Grade 7 - B')">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-bold text-gray-800">Grade 7 - B</h3>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">English</span>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-2">
+                                <span><i class="fas fa-users mr-1"></i> 30 students</span>
+                                <span><i class="fas fa-key mr-1"></i> 5831</span>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-4">
+                                <span><i class="fas fa-gamepad mr-1"></i> 3 activities</span>
+                                <span class="font-medium">Avg: 79%</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="flex-1 py-2 px-3 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-lg transition duration-300">
+                                    VIEW
+                                </button>
+                                <button class="flex-1 py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                    ADD ACTIVITY
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Class Card 3 -->
+                    <div class="activity-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="alert('Navigating to Grade 8 - A')">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-bold text-gray-800">Grade 8 - A</h3>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">English</span>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-2">
+                                <span><i class="fas fa-users mr-1"></i> 32 students</span>
+                                <span><i class="fas fa-key mr-1"></i> 6942</span>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-4">
+                                <span><i class="fas fa-gamepad mr-1"></i> 2 activities</span>
+                                <span class="font-medium">Avg: 88%</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="flex-1 py-2 px-3 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-lg transition duration-300">
+                                    VIEW
+                                </button>
+                                <button class="flex-1 py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                    ADD ACTIVITY
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Suggested Activities Section -->
+            <section class="mb-12">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800">Suggested for your Grade 7</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Activity 1 -->
+                    <div class="activity-card bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <div class="text-4xl mb-4">⚔️</div>
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Conflict Detective</h3>
+                            <p class="text-gray-600 text-sm mb-4">Identify conflict types in stories</p>
+                            <p class="text-xs text-gray-500 mb-4"><i class="fas fa-chart-line mr-1"></i> Used by 45 G7 teachers • 10-12 min</p>
+                            <button class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                USE AGAIN
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Activity 2 -->
+                    <div class="activity-card bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <div class="text-4xl mb-4">🧠</div>
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Character Traits Match</h3>
+                            <p class="text-gray-600 text-sm mb-4">Match traits to characters</p>
+                            <p class="text-xs text-gray-500 mb-4"><i class="fas fa-chart-line mr-1"></i> Used by 38 G7 teachers • 5-7 min</p>
+                            <button class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                USE AGAIN
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Activity 3 -->
+                    <div class="activity-card bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <div class="text-4xl mb-4">📝</div>
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Poetry Scavenger Hunt</h3>
+                            <p class="text-gray-600 text-sm mb-4">Find figures of speech in poems</p>
+                            <p class="text-xs text-gray-500 mb-4"><i class="fas fa-chart-line mr-1"></i> Used by 52 G7 teachers • 12-15 min</p>
+                            <button class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                USE AGAIN
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activities Section -->
+            <section class="mb-12">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800">Your Recent Activities</h2>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="divide-y divide-gray-200">
+                        <!-- Activity 1 -->
+                        <div class="p-4 hover:bg-gray-50">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                                <div class="mb-2 md:mb-0">
+                                    <h3 class="font-medium text-gray-800">Conflict Detective</h3>
+                                    <p class="text-sm text-gray-600">Grade 7 - A • May 15, 2025</p>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-sm text-gray-600"><i class="fas fa-users mr-1"></i> 28 played</span>
+                                    <span class="text-sm font-medium">Avg: 82%</span>
+                                    <button class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                        VIEW RESULTS
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity 2 -->
+                        <div class="p-4 hover:bg-gray-50">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                                <div class="mb-2 md:mb-0">
+                                    <h3 class="font-medium text-gray-800">Character Traits Match</h3>
+                                    <p class="text-sm text-gray-600">Grade 7 - B • May 12, 2025</p>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-sm text-gray-600"><i class="fas fa-users mr-1"></i> 30 played</span>
+                                    <span class="text-sm font-medium">Avg: 79%</span>
+                                    <button class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                        VIEW RESULTS
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity 3 -->
+                        <div class="p-4 hover:bg-gray-50">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                                <div class="mb-2 md:mb-0">
+                                    <h3 class="font-medium text-gray-800">Poetry Scavenger Hunt</h3>
+                                    <p class="text-sm text-gray-600">Grade 8 - A • May 10, 2025</p>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-sm text-gray-600"><i class="fas fa-users mr-1"></i> 32 played</span>
+                                    <span class="text-sm font-medium">Avg: 88%</span>
+                                    <button class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                        VIEW RESULTS
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Needs Attention Section -->
+            <section>
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle text-yellow-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-yellow-800">Needs your attention</h3>
+                            <div class="mt-2 text-sm text-yellow-700">
+                                <p>• 3 students in Grade 7 - B haven't started "Character Traits Match" (due tomorrow)</p>
+                                <p>• 5 students in Grade 7 - A scored below 60% on "Conflict Detective"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Page 5: Student Class Homepage -->
+    <div id="student-home" class="min-h-screen hidden">
+        <header class="py-4 px-6 shadow-sm bg-white">
+            <div class="container mx-auto flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="http://static.photos/education/200x200/1" alt="EduGame Logo" class="h-10 w-auto">
+                    <span class="ml-3 text-xl font-bold text-blue-600">EduGame</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="mr-4 text-sm text-gray-700">Ms. Reyes - Grade 7 A (Code: 4729)</span>
+                    <button onclick="navigateTo('landing-page')" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-lg transition duration-300">
+                        LEAVE CLASS
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="container mx-auto px-6 py-8">
+            <!-- Today's Activity -->
+            <section class="mb-12">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="flex-shrink-0">
+                                <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center text-3xl">
+                                    ⚔️
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h2 class="text-2xl font-bold text-gray-800 mb-2">Conflict Detective</h2>
+                                <p class="text-gray-700 font-medium mb-4">Learning Target: <span class="font-normal">I can identify character vs. character, character vs. society, and character vs. nature conflicts</span></p>
+                                <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-6">
+                                    <span><i class="fas fa-book mr-1"></i> 8 passages</span>
+                                    <span><i class="fas fa-clock mr-1"></i> 10-12 minutes</span>
+                                    <span><i class="fas fa-calendar-day mr-1"></i> Due today</span>
+                                </div>
+                                <button class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition duration-300">
+                                    START ACTIVITY
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Your Activities -->
+            <section class="mb-12">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800">Your Activities</h2>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <!-- Completed Section -->
+                    <div class="p-4 bg-gray-50 border-b">
+                        <h3 class="font-medium text-gray-800">COMPLETED</h3>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <!-- Activity 1 -->
+                        <div class="p-4 hover:bg-gray-50">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                                <div class="mb-2 md:mb-0">
+                                    <h3 class="font-medium text-gray-800">Character Traits Match</h3>
+                                    <p class="text-sm text-gray-600">Completed: May 12, 2025</p>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-sm font-medium">Score: 85%</span>
+                                    <button class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                        VIEW RESULTS
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity 2 -->
+                        <div class="p-4 hover:bg-gray-50">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                                <div class="mb-2 md:mb-0">
+                                    <h3 class="font-medium text-gray-800">Poetry Terms Quiz</h3>
+                                    <p class="text-sm text-gray-600">Completed: May 5, 2025</p>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-sm font-medium">Score: 92%</span>
+                                    <button class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                        VIEW RESULTS
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- To Do Section -->
+                    <div class="p-4 bg-gray-50 border-b">
+                        <h3 class="font-medium text-gray-800">TO DO</h3>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <!-- Activity 1 -->
+                        <div class="p-4 hover:bg-gray-50">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                                <div class="mb-2 md:mb-0">
+                                    <h3 class="font-medium text-gray-800">Conflict Detective</h3>
+                                    <p class="text-sm text-gray-600">Due: Today, May 15, 2025</p>
+                                </div>
+                                <button class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition duration-300">
+                                    START
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Activity 2 -->
+                        <div class="p-4 hover:bg-gray-50">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                                <div class="mb-2 md:mb-0">
+                                    <h3 class="font-medium text-gray-800">Story Elements Review</h3>
+                                    <p class="text-sm text-gray-600">Due: May 18, 2025</p>
+                                </div>
+                                <button class="px-3 py-1 bg-gray-200 text-gray-600 text-sm font-medium rounded-lg cursor-not-allowed" disabled>
+                                    START
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Your Progress -->
+            <section class="mb-12">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800">Your Progress</h2>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="space-y-4">
+                        <!-- Skill 1 -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-700">Conflict Analysis</span>
+                                <span class="text-sm text-gray-500">70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 2 -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-700">Character Analysis</span>
+                                <span class="text-sm text-gray-500">80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 3 -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-700">Poetry Analysis</span>
+                                <span class="text-sm text-gray-500">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Classmates Online -->
+            <section>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-green-100 p-3 rounded-full">
+                            <i class="fas fa-users text-green-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-medium text-gray-800">5 classmates online</h3>
+                            <p class="text-sm text-gray-600">Chat coming soon!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Initialize AOS animations
+        AOS.init();
+
+        // User state management
+        let currentUser = {
+            name: "Ms. Reyes", // Default fallback
+            email: "",
+            isLoggedIn: false
+        };
+
+        // Navigation between pages
+        function navigateTo(pageId) {
+            document.querySelectorAll('[id$="-page"], [id$="-login"], [id$="-dashboard"], [id$="-code"], [id$="-home"]').forEach(el => {
+                if (el) el.classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+            
+            // Update dashboard welcome message if navigating to teacher dashboard
+            if (pageId === 'teacher-dashboard') {
+                updateWelcomeMessage();
+            }
+        }
+
+        // Update welcome message with current user's name
+        function updateWelcomeMessage() {
+            const welcomeElement = document.getElementById('welcome-user');
+            if (welcomeElement) {
+                welcomeElement.textContent = `Welcome back, ${currentUser.name}!`;
+            }
+        }
+
+        // Logout function
+        function logout() {
+            currentUser = {
+                name: "Ms. Reyes",
+                email: "",
+                isLoggedIn: false
+            };
+            navigateTo('landing-page');
+        }
+
+        // Show landing page by default
+        document.addEventListener('DOMContentLoaded', function() {
+            navigateTo('landing-page');
+        });
+
+        // Toggle between login and signup tabs
+        function switchToSignup() {
+            document.getElementById('login-tab-btn').classList.remove('text-blue-600', 'border-blue-600');
+            document.getElementById('login-tab-btn').classList.add('text-gray-500');
+            document.getElementById('signup-tab-btn').classList.remove('text-gray-500');
+            document.getElementById('signup-tab-btn').classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+            
+            document.getElementById('login-tab').classList.remove('active');
+            document.getElementById('signup-tab').classList.add('active');
+        }
+
+        function switchToLogin() {
+            document.getElementById('signup-tab-btn').classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+            document.getElementById('signup-tab-btn').classList.add('text-gray-500');
+            document.getElementById('login-tab-btn').classList.remove('text-gray-500');
+            document.getElementById('login-tab-btn').classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+            
+            document.getElementById('signup-tab').classList.remove('active');
+            document.getElementById('login-tab').classList.add('active');
+        }
+
+        // Tab button event listeners
+        document.getElementById('login-tab-btn').addEventListener('click', switchToLogin);
+        document.getElementById('signup-tab-btn').addEventListener('click', switchToSignup);
+
+        // Toggle password visibility
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Form validation for login
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (!email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // Extract name from email (simulate user lookup)
+            // In a real app, this would come from a database
+            const nameFromEmail = email.split('@')[0].replace(/[._]/g, ' ');
+            const formattedName = nameFromEmail.split(' ').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+            
+            // Update current user
+            currentUser = {
+                name: formattedName || "Teacher",
+                email: email,
+                isLoggedIn: true
+            };
+            
+            // Simulate successful login
+            alert(`Welcome back, ${currentUser.name}!`);
+            navigateTo('teacher-dashboard');
+        });
+
+        // Form validation for signup
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            const terms = document.getElementById('terms').checked;
+            
+            // Validate fields
+            if (!name || !email || !password || !confirmPassword) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (!email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            if (!terms) {
+                alert('You must agree to the Terms of Service and Privacy Policy');
+                return;
+            }
+            
+            // Check if at least one grade level is selected
+            const gradeLevels = document.querySelectorAll('input[type="checkbox"]:checked');
+            if (gradeLevels.length === 0) {
+                alert('Please select at least one grade level you teach');
+                return;
+            }
+            
+            // Update current user
+            currentUser = {
+                name: name,
+                email: email,
+                isLoggedIn: true
+            };
+            
+            // Simulate successful signup
+            alert(`Welcome to EduGame, ${name}!`);
+            navigateTo('teacher-dashboard');
+        });
+
+        // Code input navigation
+        function moveToNext(input, nextIndex) {
+            if (input.value.length === 1) {
+                const nextInput = input.nextElementSibling;
+                if (nextInput) {
+                    nextInput.focus();
+                } else {
+                    // Last input - submit form
+                    document.getElementById('code-form').dispatchEvent(new Event('submit'));
+                }
+            }
+        }
+
+        // Code form submission
+        document.getElementById('code-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const inputs = document.querySelectorAll('.code-input');
+            let code = '';
+            inputs.forEach(input => {
+                code += input.value;
+            });
+            
+            if (code.length === 6) {
+                // Simulate successful code entry
+                alert(`Entering class with code: ${code}`);
+                navigateTo('student-home');
+            } else {
+                alert('Please enter a complete 6-digit code');
+            }
+        });
+
+        // Profile dropdown toggle
+        document.getElementById('profile-btn').addEventListener('click', function() {
+            document.getElementById('profile-dropdown').classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('#profile-btn') && !event.target.closest('#profile-dropdown')) {
+                document.getElementById('profile-dropdown').classList.add('hidden');
+            }
+        });
+
+        // Search games function
+        function searchGames() {
+            const searchTerm = document.getElementById('game-search').value;
+            if (searchTerm.trim() === '') {
+                alert('Please enter what you want to teach today');
+                return;
+            }
+            alert(`Searching for games about: ${searchTerm}`);
+        }
+    </script>
+</body>
+</html>
